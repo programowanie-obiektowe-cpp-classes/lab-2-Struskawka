@@ -17,11 +17,14 @@ public:
 
     //$1 konstruktor kopiujący
   ResourceManager(const ResourceManager& rescop1) 
-    { res=new Resource(*rescop1.res)}
+    { res=new Resource; *res=*rescop1.res}
     
     //$2 kopiujący operator przypisania
-  ResourceManager& operator=(const ResourceManager& rescop2) 
-    {delete res; res=new Resource(*rescop2.res); return *this; }
+  ResourceManager operator=(const ResourceManager& rescop2) 
+    { if(this != &rescop2)
+      {delete res; res=new Resource; *res=*rescop2.res;} 
+      return *this;
+    }
 
     //- posiada metodę `double get()`, która zwraca wynik zawołania metody `get` obiektu, którym zarządza
   double get()
