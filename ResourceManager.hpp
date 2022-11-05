@@ -11,7 +11,23 @@ private:
 
 public:
 
+    //- posiada konstruktor domyślny, który inicjalizuje obiekt typu `Resource` tak, aby nie zarządzał żadnym zasobem
+    //- jest właścicielem (czyt. zarządza) obiektu typu `Resource`
   ResourceManager() {res=new Resource;}
+
+    //$1 konstruktor kopiujący
+  ResourceManager(const ResourceManager& rescop1) 
+    { res=new Resource(*rescop1.res)}
+    
+    //$2 kopiujący operator przypisania
+  ResourceManager& operator=(const ResourceManager& rescop2) 
+    {delete res; res=new Resource(*rescop2.res); return *this; }
+
+    //- posiada metodę `double get()`, która zwraca wynik zawołania metody `get` obiektu, którym zarządza
+  double get()
+    {return resource->get();}
+
+    //$5 destruktor
   ~ResourceManager() {delete res;}
 
 
@@ -21,18 +37,14 @@ public:
 
 
 /*
-//- jest właścicielem (czyt. zarządza) obiektu typu `Resource`
-//- posiada metodę `double get()`, która zwraca wynik zawołania metody `get` obiektu, którym zarządza
-//- posiada konstruktor domyślny, który inicjalizuje obiekt typu `Resource` tak, aby nie zarządzał żadnym zasobem
-//- posiada 5 dobrze zdefiniowanych metod specjalnych
-//- jest mała, tzn. mieści się na stosie
+posiada 5 dobrze zdefiniowanych metod specjalnych:
+$1 konstruktor kopiujący
+$2 kopiujący operator przypisania
+$3 konstruktor przenoszący
+$4 przenoszący operator przypisania
+$5 destruktor
 
-Masz daną klasę `Resource`, która:
 
-- posiada konstruktor domyślny
-- posiada 5 dobrze zdefiniowanych metod specjalnych
-- posiada metodę o sygnaturze `double get()`
-- jest duża, tzn. wartość `sizeof(Resource)` jest większa niż rozmiar stosu
 
 Klasa ta symuluje duży, kosztowny w konstrukcji zasób.
 Metoda `get` symuluje wykorzystanie takiego zasobu (np. pobranie wartości zmiennoprzecinkowej z serwera).
