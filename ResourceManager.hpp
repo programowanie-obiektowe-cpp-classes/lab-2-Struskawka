@@ -17,7 +17,7 @@ public:
 
     //$1 konstruktor kopiujący
   ResourceManager(const ResourceManager& rescop1) 
-    { res=new Resource; *res=*rescop1.res}
+    { res=new Resource; *res=*rescop1.res;}
     
     //$2 kopiujący operator przypisania
   ResourceManager operator=(const ResourceManager& rescop2) 
