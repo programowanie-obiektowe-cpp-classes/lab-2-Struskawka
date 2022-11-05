@@ -20,11 +20,28 @@ public:
     { res=new Resource; *res=*rescop1.res;}
     
     //$2 kopiujący operator przypisania
-  ResourceManager operator=(const ResourceManager& rescop2) 
+  ResourceManager& operator=(const ResourceManager& rescop2) 
     { if(this != &rescop2)
       {delete res; res=new Resource; *res=*rescop2.res;} 
       return *this;
     }
+
+    //$3 konstruktor przenoszący
+  ResourceManager(ResourceManager&& resmov1)
+    {
+      res = resmov1.res;
+      resmov1.res = nullptr;
+    }
+
+    //$4 przenoszący operator przypisania  
+  ResourceManager& operator=(ResourceManager&& resmov2)
+    {
+      delete res;
+      resource = resmov2.res;
+      resmov2.res = nullptr;
+      return *this;
+    }
+        
 
     //- posiada metodę `double get()`, która zwraca wynik zawołania metody `get` obiektu, którym zarządza
   double get()
