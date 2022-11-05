@@ -37,7 +37,7 @@ public:
   ResourceManager& operator=(ResourceManager&& resmov2)
     {
       delete res;
-      resource = resmov2.res;
+      res = resmov2.res;
       resmov2.res = nullptr;
       return *this;
     }
