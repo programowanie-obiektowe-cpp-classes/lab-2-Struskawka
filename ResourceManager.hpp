@@ -20,7 +20,7 @@ public:
     { res=new Resource; *res=*rescop1.res;}
     
     //$2 kopiujący operator przypisania
-  ResourceManager& operator=(const ResourceManager& rescop2) 
+  ResourceManager operator=(const ResourceManager& rescop2) 
     { if(this != &rescop2)
       {delete res; res=new Resource; *res=*rescop2.res;} 
       return *this;
