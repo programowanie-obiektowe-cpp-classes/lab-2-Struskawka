@@ -28,7 +28,7 @@ public:
 
     //- posiada metodę `double get()`, która zwraca wynik zawołania metody `get` obiektu, którym zarządza
   double get()
-    {return resource->get();}
+    {return res->get();}
 
     //$5 destruktor
   ~ResourceManager() {delete res;}
